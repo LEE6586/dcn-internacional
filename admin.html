@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel — DCN Internacional</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/dcn/assets/logo-dcn-640.jpg" />
+  <link rel="stylesheet" href="/dcn/church.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body class="adm-body">
+
+  <header class="adm-top">
+    <a class="adm-top__brand" href="/dcn/" aria-label="Ir al sitio">
+      <img src="/dcn/assets/logo-dcn-wide.jpg" alt="DCN Internacional" width="112" height="68" />
+      <span class="mono">Panel de administración</span>
+    </a>
+    <div class="adm-top__actions">
+      <a class="adm-link mono" href="/dcn/" target="_blank" rel="noopener">Ver sitio ↗</a>
+      <button class="btn btn--ghost" id="logoutBtn" type="button" hidden>Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <main class="adm-login" id="loginView">
+    <form class="adm-login__card" id="loginForm">
+      <span class="mono">Acceso privado</span>
+      <h1>Reportes DCN</h1>
+      <p>Ingresa la clave del equipo de tesorería y secretaría para ver inscripciones y ofrendas.</p>
+      <label class="field">
+        <span class="field__label mono">Clave</span>
+        <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" required />
+      </label>
+      <button class="btn btn--solid btn--lg" type="submit">Entrar</button>
+      <p class="adm-error mono" id="loginError" role="alert"></p>
+    </form>
+  </main>
+
+  <!-- DASHBOARD -->
+  <main class="adm-dash" id="dashView" hidden>
+    <div class="adm-head">
+      <div>
+        <span class="mono">Reportes</span>
+        <h1>Inscripciones y ofrendas</h1>
+        <p>Consulta por año y rango de fechas, revisa los totales y exporta la información a Excel.</p>
+      </div>
+      <div class="adm-head__actions">
+        <a class="btn btn--ghost" id="backupBtn" href="/api/admin/backup">Respaldo</a>
+        <button class="btn btn--outline" type="button" id="printBtn">Imprimir</button>
+        <a class="btn btn--solid" id="exportBtn" href="#">Exportar CSV</a>
+      </div>
+    </div>
+
+    <div class="adm-tabs" role="tablist" aria-label="Tipo de reporte">
+      <button class="adm-tab is-active" data-type="inscripciones" role="tab" aria-selected="true">Inscripciones</button>
+      <button class="adm-tab" data-type="ofrendas" role="tab" aria-selected="false">Ofrendas</button>
+      <button class="adm-tab" data-type="contactos" role="tab" aria-selected="false">Mensajes</button>
+    </div>
+
+    <form class="adm-filters" id="filterForm">
+      <label class="field">
+        <span class="field__label mono">Año</span>
+        <select id="year"><option value="">Todos</option></select>
+      </label>
+      <label class="field">
+        <span class="field__label mono">Desde</span>
+        <input type="date" id="from" />
+      </label>
+      <label class="field">
+        <span class="field__label mono">Hasta</span>
+        <input type="date" id="to" />
+      </label>
+      <label class="field adm-filters__search">
+        <span class="field__label mono">Buscar</span>
+        <input type="search" id="q" placeholder="Nombre, correo, cédula, referencia…" />
+      </label>
+      <div class="adm-filters__actions">
+        <button class="btn btn--solid" type="submit">Aplicar</button>
+        <button class="btn btn--ghost" type="button" id="clearBtn">Limpiar</button>
+      </div>
+    </form>
+
+    <p class="adm-status mono" id="status" role="status" aria-live="polite"></p>
+
+    <section class="adm-cards" id="summary" aria-label="Resumen"></section>
+
+    <section class="adm-monthly">
+      <div class="adm-section-head">
+        <h2>Resumen por mes</h2>
+        <span class="mono" id="monthlyNote"></span>
+      </div>
+      <div class="adm-bars" id="monthly"></div>
+    </section>
+
+    <section class="adm-table-section">
+      <div class="adm-section-head">
+        <h2 id="tableTitle">Inscripciones</h2>
+        <span class="mono" id="tableCount"></span>
+      </div>
+      <div class="adm-table-wrap">
+        <table class="adm-table">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="adm-foot mono">DCN Internacional · Los datos se guardan en la base de datos del servidor. Descarga un respaldo periódicamente.</p>
+  </main>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Datos locales y respaldos: nunca subir al repositorio
+data/
+backups/
+shots/
+tmp_*
+*.log
+.env

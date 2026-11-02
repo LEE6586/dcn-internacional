@@ -1,0 +1,10 @@
+﻿DCN INTERNACIONAL — CARPETA PARA GITHUB
+
+1. Abre GitHub Desktop.
+2. File > Add local repository > selecciona esta carpeta.
+3. Si no es repositorio, crea uno llamado dcn-internacional.
+4. Commit y Publish repository.
+5. En Railway: New Project > Deploy from GitHub repo.
+
+NO subas las carpetas data/ ni backups/.
+La guía completa está en RAILWAY.md.
