@@ -47,6 +47,7 @@
       </div>
       <div class="adm-head__actions">
         <a class="btn btn--ghost" id="backupBtn" href="/api/admin/backup">Respaldo</a>
+        <button class="btn btn--outline" type="button" id="backupsBtn">Historial</button>
         <button class="btn btn--outline" type="button" id="printBtn">Imprimir</button>
         <a class="btn btn--solid" id="exportBtn" href="#">Exportar CSV</a>
       </div>
@@ -108,6 +109,22 @@
 
     <p class="adm-foot mono">DCN Internacional · Los datos se guardan en la base de datos del servidor. Descarga un respaldo periódicamente.</p>
   </main>
+
+  <dialog id="backupsDialog" class="adm-modal">
+    <div class="adm-modal__head">
+      <div>
+        <span class="mono">Seguridad</span>
+        <h2>Historial de respaldos</h2>
+      </div>
+      <button class="adm-modal__close" type="button" id="backupsClose" aria-label="Cerrar">×</button>
+    </div>
+    <p class="adm-modal__note">Copias automáticas de los últimos 14 días. Descarga una fuera del servidor.</p>
+    <div class="adm-backups" id="backupsList"></div>
+    <div class="adm-modal__actions">
+      <a class="btn btn--ghost" href="/api/admin/backup">Descargar respaldo actual</a>
+      <button class="btn btn--outline" type="button" id="backupsRefresh">Actualizar</button>
+    </div>
+  </dialog>
 
   <script src="admin.js" defer></script>
 </body>

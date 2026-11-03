@@ -294,6 +294,54 @@
     showLogin();
   });
 
+  /* ── RESPALDOS ───────────────────────────────────────────────────────── */
+  const backupsDialog = $("#backupsDialog");
+
+  function fmtBytes(bytes) {
+    const n = Number(bytes || 0);
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+  }
+
+  async function loadBackups() {
+    const list = $("#backupsList");
+    if (!list) return;
+    list.innerHTML = '<p class="adm-empty">Cargando respaldos…</p>';
+    try {
+      const data = await api("/api/admin/backups");
+      const backups = Array.isArray(data.backups) ? data.backups : [];
+      if (!backups.length) {
+        list.innerHTML = '<p class="adm-empty">Todavía no hay copias automáticas.</p>';
+        return;
+      }
+      list.innerHTML = backups.map((b) => `
+        <a class="adm-backup" href="/api/admin/backups/${encodeURIComponent(b.name)}">
+          <span class="adm-backup__main">
+            <strong>${esc(b.name)}</strong>
+            <span class="mono">${fmtDate(b.created_at)} · ${fmtBytes(b.size)}</span>
+          </span>
+          <span class="adm-backup__download">Descargar ↓</span>
+        </a>`).join("");
+    } catch (err) {
+      list.innerHTML = `<p class="adm-empty">No se pudieron cargar los respaldos${err.status === 401 ? ": inicia sesión de nuevo." : "."}</p>`;
+    }
+  }
+
+  $("#backupsBtn")?.addEventListener("click", async () => {
+    if (!backupsDialog) return;
+    if (typeof backupsDialog.showModal === "function") backupsDialog.showModal();
+    else backupsDialog.setAttribute("open", "");
+    await loadBackups();
+  });
+
+  $("#backupsClose")?.addEventListener("click", () => {
+    if (backupsDialog?.open) backupsDialog.close();
+    else backupsDialog?.removeAttribute("open");
+  });
+
+  $("#backupsRefresh")?.addEventListener("click", loadBackups);
+
   $$(".adm-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (state.type === btn.dataset.type) return;

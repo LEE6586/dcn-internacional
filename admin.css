@@ -1,9 +1,11 @@
 /* ==========================================================================
    DCN — Panel de administración
    ========================================================================== */
+
 [hidden] {
   display: none !important;
 }
+
 .adm-body {
   min-height: 100vh;
   background:
@@ -258,6 +260,56 @@
 }
 .adm-badge--usd { color: var(--sky); border-color: rgba(156, 218, 243, 0.4); }
 .adm-badge--bs { color: var(--gold); border-color: rgba(232, 207, 154, 0.4); }
+
+/* ── MODAL RESPALDOS ───────────────────────────────────────────────────── */
+.adm-modal {
+  width: min(640px, calc(100% - 28px));
+  max-height: min(78vh, 680px);
+  padding: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  background: var(--night-1);
+  color: var(--ice);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+  overflow: auto;
+}
+.adm-modal::backdrop { background: rgba(2, 7, 14, 0.78); backdrop-filter: blur(4px); }
+.adm-modal__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.adm-modal__head .mono { color: var(--sky); font-size: 0.54rem; }
+.adm-modal__head h2 { margin: 3px 0 0; font-family: var(--serif); font-weight: 400; font-size: 1.65rem; }
+.adm-modal__close {
+  width: 34px; height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ice-mute);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.adm-modal__close:hover { color: var(--ice); border-color: var(--sky); }
+.adm-modal__note { margin: 12px 0 16px; color: var(--ice-mute); font-size: 0.8rem; line-height: 1.6; }
+.adm-backups { display: grid; gap: 8px; }
+.adm-backup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgba(7, 18, 36, 0.65);
+  color: var(--ice);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.adm-backup:hover { border-color: var(--sky); background: rgba(156, 218, 243, 0.08); }
+.adm-backup__main { display: grid; gap: 4px; min-width: 0; }
+.adm-backup__main strong { font-weight: 500; font-size: 0.85rem; overflow-wrap: anywhere; }
+.adm-backup__main .mono { color: var(--ice-mute); font-size: 0.55rem; }
+.adm-backup__download { flex: none; color: var(--sky); font-family: var(--mono); font-size: 0.58rem; }
+.adm-modal__actions { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+.adm-modal .adm-empty { margin: 0; padding: 22px 12px; text-align: center; color: var(--ice-mute); font-size: 0.8rem; }
 
 .adm-foot { color: var(--ice-mute); font-size: 0.55rem; padding-top: 10px; border-top: 1px solid var(--line-soft); }
 

@@ -578,6 +578,47 @@ async function handleApi(req, res, url) {
     return fs.createReadStream(DB_PATH).pipe(res);
   }
 
+  if (req.method === "GET" && pathname === "/api/admin/backups") {
+    let files = [];
+    try {
+      files = fs.readdirSync(BACKUP_DIR)
+        .filter((name) => /^dcn-[A-Za-z0-9._-]+\.db$/.test(name))
+        .map((name) => {
+          const full = path.join(BACKUP_DIR, name);
+          const stat = fs.statSync(full);
+          return { name, size: stat.size, created_at: stat.mtime.toISOString() };
+        })
+        .filter((item) => fs.lstatSync(path.join(BACKUP_DIR, item.name)).isFile())
+        .sort((a, b) => b.name.localeCompare(a.name));
+    } catch (error) {
+      console.error("[DCN] No se pudo listar respaldos:", error.message);
+    }
+    return sendJson(res, 200, { backups: files });
+  }
+
+  if (req.method === "GET" && pathname.startsWith("/api/admin/backups/")) {
+    let name = "";
+    try { name = decodeURIComponent(pathname.slice("/api/admin/backups/".length)); } catch {}
+    name = path.basename(name);
+    if (!/^dcn-[A-Za-z0-9._-]+\.db$/.test(name)) {
+      return sendJson(res, 400, { error: "Nombre de respaldo inválido" });
+    }
+    const full = path.join(BACKUP_DIR, name);
+    if (!full.startsWith(BACKUP_DIR + path.sep)) {
+      return sendJson(res, 400, { error: "Ruta inválida" });
+    }
+    let stat;
+    try { stat = fs.lstatSync(full); } catch { return sendJson(res, 404, { error: "Respaldo no encontrado" }); }
+    if (!stat.isFile()) return sendJson(res, 404, { error: "Respaldo no encontrado" });
+    res.writeHead(200, {
+      "content-type": "application/octet-stream",
+      "content-disposition": `attachment; filename="${name}"`,
+      "content-length": stat.size,
+      "cache-control": "no-store"
+    });
+    return fs.createReadStream(full).pipe(res);
+  }
+
   return sendJson(res, 404, { error: "Ruta no encontrada" });
 }
 
