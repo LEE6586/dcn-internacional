@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Presentación DCN Internacional</title>
+  <meta name="description" content="Presentación del sitio web de DCN Internacional: cada sección, animación y red social." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="assets/logo-dcn-crop.jpg" />
+  <link rel="stylesheet" href="church.css" />
+  <link rel="stylesheet" href="presentacion.css?v=3" />
+</head>
+<body class="pres-body">
+  <main class="pres" id="pres">
+    <div class="pres__stage" id="presStage">
+      <iframe class="pres__site" id="presSite" src="index.html" title="Sitio web de DCN Internacional"></iframe>
+      <div class="pres__shade" aria-hidden="true"></div>
+
+      <div class="pres__hud">
+        <span class="pres__brand mono">DCN · Presentación</span>
+        <span class="pres__count mono" id="presCount">01 / 13</span>
+        <button class="pres__exit" type="button" id="presExit">Salir ✕</button>
+      </div>
+
+      <div class="pres__lower" id="presLower" hidden>
+        <span class="pres__kicker mono" id="presKicker"></span>
+        <h1 class="pres__title" id="presTitle"></h1>
+        <div class="pres__bar"><i id="presProgress"></i></div>
+        <div class="pres__controls" id="presControls">
+          <button class="pres__btn" type="button" id="presPrev" aria-label="Anterior">←</button>
+          <button class="pres__btn pres__btn--main" type="button" id="presPause">Pausa</button>
+          <button class="pres__btn" type="button" id="presNext">Siguiente →</button>
+          <button class="pres__btn" type="button" id="presMute">Voz</button>
+        </div>
+      </div>
+
+      <div class="pres__social" id="presSocial" hidden>
+        <span class="pres__kicker mono">Nuestra señal</span>
+        <h2>Síguenos.</h2>
+        <p>Todo lo que Dios está haciendo en la casa, también en redes.</p>
+        <div class="pres__socialGrid">
+          <a class="pres-social" href="https://www.instagram.com/dcnisanfrancisco.ve/" target="_blank" rel="noopener">
+            <span class="pres-social__beam" aria-hidden="true"></span>
+            <span class="pres-social__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+            <span class="pres-social__name mono">Instagram</span>
+            <span class="pres-social__handle mono">@dcnisanfrancisco.ve</span>
+            <span class="pres-social__arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="pres-social pres-social--tt" href="https://www.tiktok.com/@dcn.internacional" target="_blank" rel="noopener">
+            <span class="pres-social__beam" aria-hidden="true"></span>
+            <span class="pres-social__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v10.5a4.5 4.5 0 1 1-4.5-4.5"/><path d="M14 4c.6 3 2.4 4.7 5 5"/></svg></span>
+            <span class="pres-social__name mono">TikTok</span>
+            <span class="pres-social__handle mono">@dcn.internacional</span>
+            <span class="pres-social__arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="pres-social pres-social--yt" href="https://www.youtube.com/@DCNINTERNACIONALsanfrancisco" target="_blank" rel="noopener">
+            <span class="pres-social__beam" aria-hidden="true"></span>
+            <span class="pres-social__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10.5 9.5 5 2.5-5 2.5v-5Z" fill="currentColor" stroke="none"/></svg></span>
+            <span class="pres-social__name mono">YouTube</span>
+            <span class="pres-social__handle mono">@DCNINTERNACIONALsanfrancisco</span>
+            <span class="pres-social__arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pres__end" id="presEnd" hidden>
+        <img src="assets/logo-dcn-wide.jpg" alt="DCN Internacional" width="180" height="108" />
+        <span class="pres__kicker mono">DCN Internacional · San Francisco, Zulia</span>
+        <h2>Gracias por<br /><em>recorrer la casa.</em></h2>
+        <p>Donde tu familia es restaurada.</p>
+        <div class="pres__endLinks mono">
+          <a href="https://www.instagram.com/dcnisanfrancisco.ve/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@dcn.internacional" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.youtube.com/@DCNINTERNACIONALsanfrancisco" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <button class="pres__btn pres__btn--main" type="button" id="presClose">Cerrar presentación</button>
+      </div>
+
+      <div class="pres__intro" id="presIntro">
+        <div class="pres__introCard">
+          <img class="pres__logo" src="assets/logo-dcn-crop.jpg" alt="" width="68" height="68" />
+          <span class="pres__kicker mono">Presentación del sitio</span>
+          <h1>Todo lo que<br /><em>hace la casa.</em></h1>
+          <p>Un recorrido por el inicio, los horarios, la visión, la escalera del éxito, los ministerios, la formación, la galería, las ofrendas, el contacto y las redes sociales.</p>
+          <p class="pres__voice" id="presVoice">Cargando voz…</p>
+          <div class="pres__actions">
+            <button class="pres__play" type="button" id="presPlay">▶ Reproducir presentación</button>
+            <button class="pres__record" type="button" id="presRecord">⬇ Grabar y descargar</button>
+          </div>
+          <p class="pres__hint">Para grabar: elige <strong>Esta pestaña</strong> con audio o <strong>Toda la pantalla</strong> con audio del sistema. El video se descarga al terminar.</p>
+          <a class="pres__link mono" href="index.html">← Volver al sitio</a>
+        </div>
+      </div>
+
+      <div class="pres__rec mono" id="presRec" hidden>● REC</div>
+      <div class="pres__cursor" id="presCursor" aria-hidden="true"><b></b></div>
+      <p class="pres__status mono" id="presStatus" hidden></p>
+      <a class="pres__download" id="presDownload" hidden>⬇ Descargar video</a>
+    </div>
+  </main>
+
+  <script src="presentacion.js?v=3" defer></script>
+</body>
+</html>
