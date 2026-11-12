@@ -22,7 +22,7 @@
     loginView.hidden = false;
     dashView.hidden = true;
     logoutBtn.hidden = true;
-    $("#password")?.focus();
+    $("#adminUser")?.focus();
   }
   function showDash() {
     loginView.hidden = true;
@@ -275,13 +275,13 @@
     try {
       await api("/api/admin/login", {
         method: "POST",
-        body: JSON.stringify({ password: $("#password").value })
+        body: JSON.stringify({ usuario: $("#adminUser").value.trim(), password: $("#password").value })
       });
       $("#password").value = "";
       showDash();
       await load();
     } catch (err) {
-      if (error) error.textContent = err.status === 401 ? "Clave incorrecta. Intenta de nuevo." : err.message;
+      if (error) error.textContent = err.status === 401 ? "Usuario o clave incorrectos." : err.message;
     } finally {
       if (btn) btn.disabled = false;
     }

@@ -18,6 +18,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.argv[2] || process.env.PORT || 8080);
 const HOST = process.env.HOST || "127.0.0.1";
 const ADMIN_PASSWORD = process.env.DCN_ADMIN_PASSWORD || "dcn2026";
+const ADMIN_USER = process.env.DCN_ADMIN_USER || "admin";
 const SESSION_MS = 8 * 60 * 60 * 1000;
 
 /* ── BASE DE DATOS ─────────────────────────────────────────────────────── */
@@ -408,13 +409,15 @@ async function handleApi(req, res, url) {
     if (!allowLogin(ip)) return sendJson(res, 429, { error: "Demasiados intentos. Espera 15 minutos." });
     let body;
     try { body = await readJson(req); } catch { return sendJson(res, 400, { error: "Solicitud inválida" }); }
+    const givenUser = str(body.usuario, 80).toLowerCase() || ADMIN_USER.toLowerCase();
+    const userOk = givenUser === ADMIN_USER.toLowerCase();
     const given = str(body.password, 200);
     const a = Buffer.from(given);
     const b = Buffer.from(ADMIN_PASSWORD);
-    const ok = a.length === b.length && crypto.timingSafeEqual(a, b);
-    if (!ok) {
+    const passwordOk = a.length === b.length && crypto.timingSafeEqual(a, b);
+    if (!userOk || !passwordOk) {
       await new Promise((r) => setTimeout(r, 350));
-      return sendJson(res, 401, { error: "Clave incorrecta" });
+      return sendJson(res, 401, { error: "Usuario o clave incorrectos" });
     }
     const token = createSession();
     const secure = (req.headers["x-forwarded-proto"] || "").includes("https") ? "; Secure" : "";

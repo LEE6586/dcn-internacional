@@ -1,5 +1,12 @@
 # Módulo de líderes y células — despliegue
 
+## Acceso al panel administrativo
+
+- **Usuario:** `admin`
+- **Contraseña:** el valor de `DCN_ADMIN_PASSWORD`.
+- Si quieres otro usuario, configura `DCN_ADMIN_USER` en Coolify.
+- Este acceso es solo para `/admin`. El portal `/lideres` usa el usuario y contraseña de cada líder, creados en **Admin → Líderes y células**.
+
 ## Ya está funcionando en producción
 
 - **Portal de líderes:** https://dcninternacionalsf.com/lideres
