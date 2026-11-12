@@ -12,6 +12,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
+import { ensureLideresSchema, handleLideresApi } from "./lideres-api.mjs";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.argv[2] || process.env.PORT || 8080);
@@ -78,6 +79,8 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_ofr_date ON ofrendas(date);
   CREATE INDEX IF NOT EXISTS idx_con_created ON contactos(created_at);
 `);
+
+ensureLideresSchema(db);
 
 /* Respaldo automático: 14 copias diarias dentro del disco persistente */
 const BACKUP_DIR = path.join(DATA_DIR, "backups");
@@ -264,6 +267,21 @@ function listYears() {
 async function handleApi(req, res, url) {
   const { pathname } = url;
   const ip = req.socket.remoteAddress || "local";
+
+  if (
+    pathname.startsWith("/api/lideres/") ||
+    pathname.startsWith("/api/admin/lideres") ||
+    pathname === "/api/admin/celulas"
+  ) {
+    const handled = await handleLideresApi(req, res, url, {
+      db,
+      sendJson,
+      readJson,
+      nowLocalIso,
+      getAdminSession: () => getSession(req)
+    });
+    if (handled !== false) return handled;
+  }
 
   /* Registro público de inscripción */
   if (req.method === "POST" && pathname === "/api/inscripciones") {
@@ -664,6 +682,12 @@ const server = http.createServer(async (req, res) => {
     const pathname = decodeURIComponent(url.pathname);
 
     if (pathname.startsWith("/api/")) return await handleApi(req, res, url);
+    if (pathname === "/lideres" || pathname === "/lideres/") {
+      return serveFile(res, path.join(ROOT, "lideres.html"));
+    }
+    if (pathname === "/admin/lideres" || pathname === "/admin/lideres/") {
+      return serveFile(res, path.join(ROOT, "admin-lideres.html"));
+    }
     if (pathname === "/admin" || pathname === "/admin/") {
       return serveFile(res, path.join(ROOT, "admin.html"));
     }

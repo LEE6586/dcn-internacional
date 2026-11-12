@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portal de líderes — DCN Internacional</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/dcn/assets/logo-dcn-640.jpg" />
+  <link rel="stylesheet" href="/dcn/church.css" />
+  <link rel="stylesheet" href="/admin.css" />
+  <link rel="stylesheet" href="/lideres.css" />
+</head>
+<body class="adm-body lead-body">
+
+  <header class="adm-top">
+    <a class="adm-top__brand" href="/dcn/" aria-label="Ir al sitio">
+      <img src="/dcn/assets/logo-dcn-wide.jpg" alt="DCN Internacional" width="112" height="68" />
+      <span class="mono">Portal de líderes</span>
+    </a>
+    <div class="adm-top__actions">
+      <a class="adm-link mono" href="/dcn/" target="_blank" rel="noopener">Ver sitio ↗</a>
+      <button class="btn btn--ghost" id="logoutBtn" type="button" hidden>Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <main class="adm-login" id="loginView">
+    <form class="adm-login__card" id="loginForm">
+      <span class="mono">Acceso de líderes</span>
+      <h1>Reporta tu célula</h1>
+      <p>Ingresa con el usuario y la contraseña que te asignó la administración de DCN.</p>
+      <label class="field">
+        <span class="field__label mono">Usuario</span>
+        <input type="text" id="usuario" autocomplete="username" placeholder="tu.usuario" required />
+      </label>
+      <label class="field">
+        <span class="field__label mono">Contraseña</span>
+        <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" required />
+      </label>
+      <button class="btn btn--solid btn--lg" type="submit">Entrar</button>
+      <p class="adm-error mono" id="loginError" role="alert"></p>
+      <button class="lead-link" type="button" id="forgotBtn">¿Olvidaste tu contraseña?</button>
+    </form>
+  </main>
+
+  <!-- RECUPERAR -->
+  <main class="adm-login" id="forgotView" hidden>
+    <form class="adm-login__card" id="forgotForm">
+      <span class="mono">Recuperar acceso</span>
+      <h1>Restablecer contraseña</h1>
+      <p>Escribe el correo con el que fuiste registrado. Te enviaremos un enlace para crear una contraseña nueva.</p>
+      <label class="field">
+        <span class="field__label mono">Correo</span>
+        <input type="email" id="forgotEmail" autocomplete="email" placeholder="nombre@correo.com" required />
+      </label>
+      <button class="btn btn--solid btn--lg" type="submit">Enviar enlace</button>
+      <p class="adm-error mono" id="forgotError" role="alert"></p>
+      <p class="lead-ok mono" id="forgotOk" role="status"></p>
+      <button class="lead-link" type="button" id="backLogin">Volver al inicio de sesión</button>
+    </form>
+  </main>
+
+  <!-- NUEVA CONTRASEÑA -->
+  <main class="adm-login" id="resetView" hidden>
+    <form class="adm-login__card" id="resetForm">
+      <span class="mono">Enlace de recuperación</span>
+      <h1>Crea tu nueva contraseña</h1>
+      <p>El enlace vence en una hora. Usa al menos 8 caracteres.</p>
+      <label class="field">
+        <span class="field__label mono">Nueva contraseña</span>
+        <input type="password" id="resetPassword" autocomplete="new-password" minlength="8" required />
+      </label>
+      <label class="field">
+        <span class="field__label mono">Confirmar contraseña</span>
+        <input type="password" id="resetPassword2" autocomplete="new-password" minlength="8" required />
+      </label>
+      <button class="btn btn--solid btn--lg" type="submit">Guardar contraseña</button>
+      <p class="adm-error mono" id="resetError" role="alert"></p>
+      <p class="lead-ok mono" id="resetOk" role="status"></p>
+      <button class="lead-link" type="button" id="resetBack">Ir al inicio de sesión</button>
+    </form>
+  </main>
+
+  <!-- PANEL DEL LÍDER -->
+  <main class="adm-dash" id="dashView" hidden>
+    <div class="adm-head">
+      <div>
+        <span class="mono">Portal de líderes · Células</span>
+        <h1 id="leaderName">Hola</h1>
+        <p id="leaderMeta">Registra la palabra, la cantidad de personas y la fecha de tu célula.</p>
+      </div>
+      <div class="adm-head__actions">
+        <a class="btn btn--ghost" href="/dcn/" target="_blank" rel="noopener">Ver sitio</a>
+        <button class="btn btn--outline" id="logoutBtn2" type="button">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <section class="lead-grid">
+      <form class="lead-card" id="cellForm">
+        <div class="lead-card__head">
+          <span class="mono">Nuevo reporte</span>
+          <h2>Reporte de célula</h2>
+        </div>
+        <div class="lead-form-grid">
+          <label class="field">
+            <span class="field__label mono">Fecha</span>
+            <input type="date" id="fecha" required />
+          </label>
+          <label class="field">
+            <span class="field__label mono">Personas</span>
+            <input type="number" id="personas" min="1" max="1000" step="1" placeholder="12" required />
+          </label>
+          <label class="field lead-field--full">
+            <span class="field__label mono">Palabra utilizada</span>
+            <input type="text" id="palabra" maxlength="160" placeholder="Ej.: La fe que vence al mundo" required />
+          </label>
+          <label class="field lead-field--full">
+            <span class="field__label mono">Notas / observaciones <small>(opcional)</small></span>
+            <textarea id="notas" rows="3" maxlength="800" placeholder="Oración, decisiones, visitantes…"></textarea>
+          </label>
+        </div>
+        <button class="btn btn--solid btn--lg" type="submit">Guardar reporte</button>
+        <p class="adm-error mono" id="cellError" role="alert"></p>
+        <p class="lead-ok mono" id="cellOk" role="status"></p>
+      </form>
+
+      <aside class="lead-side">
+        <article class="lead-stat">
+          <span class="mono">Reportes enviados</span>
+          <strong id="statReports">0</strong>
+          <small>Desde tu última sesión</small>
+        </article>
+        <article class="lead-stat">
+          <span class="mono">Personas alcanzadas</span>
+          <strong id="statPeople">0</strong>
+          <small>Suma de tus reportes</small>
+        </article>
+        <article class="lead-card lead-card--soft">
+          <span class="mono">Identidad del líder</span>
+          <h3 id="leaderGroup">—</h3>
+          <p>Tu usuario está asociado a este grupo. Cada reporte queda registrado a tu nombre.</p>
+        </article>
+      </aside>
+    </section>
+
+    <section class="lead-card">
+      <div class="lead-card__head lead-card__head--row">
+        <div>
+          <span class="mono">Historial</span>
+          <h2>Tus células reportadas</h2>
+        </div>
+        <span class="mono" id="historyCount"></span>
+      </div>
+      <div class="lead-table-wrap">
+        <table class="lead-table">
+          <thead>
+            <tr><th>Fecha</th><th>Palabra</th><th>Personas</th><th>Notas</th></tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="adm-foot mono">DCN Internacional · Portal de líderes · Los reportes se guardan en la base de datos de la iglesia.</p>
+  </main>
+
+  <script src="/lideres.js" defer></script>
+</body>
+</html>

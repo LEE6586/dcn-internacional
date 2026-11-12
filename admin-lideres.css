@@ -1,0 +1,95 @@
+/* ==========================================================================
+   DCN — Administración de líderes y células
+   ========================================================================== */
+
+.lead-admin-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.4fr);
+  gap: 18px;
+  align-items: start;
+}
+.lead-admin-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lead-admin-form .field:nth-child(1),
+.lead-admin-form .field:nth-child(2) { grid-column: span 2; }
+.lead-filters {
+  display: grid;
+  grid-template-columns: 150px 150px 150px minmax(180px, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgba(7, 18, 36, 0.55);
+}
+.lead-filters__actions { display: flex; gap: 6px; }
+.lead-admin-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.lead-admin-stat {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: rgba(7, 18, 36, 0.55);
+}
+.lead-admin-stat .mono { color: var(--ice-mute); font-size: 0.5rem; }
+.lead-admin-stat strong { font-family: var(--serif); font-size: 1.7rem; font-weight: 400; color: var(--ice); line-height: 1; }
+.lead-chart-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgba(7, 18, 36, 0.58);
+}
+.lead-chart-legend { display: flex; flex-wrap: wrap; gap: 16px; color: var(--ice-mute); font-size: 0.7rem; }
+.lead-chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lead-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.lead-dot--hombres { background: #9cdaf3; }
+.lead-dot--mujeres { background: #e8cf9a; }
+.lead-dot--jovenes { background: #8fd6b0; }
+.lead-chart { width: 100%; overflow-x: auto; }
+.lead-chart svg { display: block; width: 100%; min-width: 620px; height: auto; }
+.lead-chart .lead-chart-empty { padding: 26px 12px; text-align: center; color: var(--ice-mute); font-size: 0.78rem; }
+.lead-actions { display: flex; gap: 5px; flex-wrap: wrap; }
+.lead-action {
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sky);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.lead-action:hover { border-color: var(--sky); background: rgba(156, 218, 243, 0.08); }
+.lead-action--danger { color: #ff9a9a; }
+.lead-action--danger:hover { border-color: #ff9a9a; background: rgba(255, 154, 154, 0.08); }
+.lead-reset-input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: #06111f;
+  color: var(--ice);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+}
+.lead-table .lead-group { color: var(--ice-mute); font-size: 0.72rem; }
+.lead-table .lead-empty { text-align: center; padding: 26px 12px; color: var(--ice-mute); }
+.lead-table .lead-notes { max-width: 340px; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ice-mute); font-size: 0.72rem; }
+
+@media (max-width: 1100px) {
+  .lead-admin-grid { grid-template-columns: 1fr; }
+  .lead-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lead-filters__actions { grid-column: span 2; justify-content: flex-end; }
+  .lead-admin-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .lead-admin-form { grid-template-columns: 1fr; }
+  .lead-admin-form .field:nth-child(1),
+  .lead-admin-form .field:nth-child(2) { grid-column: auto; }
+  .lead-filters { grid-template-columns: 1fr; }
+  .lead-filters__actions { grid-column: auto; }
+  .lead-admin-stats { grid-template-columns: 1fr 1fr; }
+}

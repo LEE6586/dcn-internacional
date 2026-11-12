@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Líderes y células — DCN Internacional</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/dcn/assets/logo-dcn-640.jpg" />
+  <link rel="stylesheet" href="/dcn/church.css" />
+  <link rel="stylesheet" href="/admin.css" />
+  <link rel="stylesheet" href="/lideres.css" />
+  <link rel="stylesheet" href="/admin-lideres.css" />
+</head>
+<body class="adm-body lead-body">
+
+  <header class="adm-top">
+    <a class="adm-top__brand" href="/admin" aria-label="Volver al panel">
+      <img src="/dcn/assets/logo-dcn-wide.jpg" alt="DCN Internacional" width="112" height="68" />
+      <span class="mono">Panel · Líderes y células</span>
+    </a>
+    <div class="adm-top__actions">
+      <a class="adm-link mono" href="/admin">← Panel</a>
+      <a class="adm-link mono" href="/dcn/" target="_blank" rel="noopener">Ver sitio ↗</a>
+      <button class="btn btn--ghost" id="logoutBtn" type="button">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main class="adm-dash" id="adminView">
+    <div class="adm-head">
+      <div>
+        <span class="mono">Administración</span>
+        <h1>Líderes y células</h1>
+        <p>Registra líderes, asigna sus credenciales y consulta los reportes de células por grupo y fecha.</p>
+      </div>
+      <div class="adm-head__actions">
+        <a class="btn btn--ghost" href="/admin">Volver al panel</a>
+      </div>
+    </div>
+
+    <section class="lead-admin-grid">
+      <form class="lead-card" id="leaderForm">
+        <div class="lead-card__head">
+          <span class="mono">Nuevo líder</span>
+          <h2>Registrar líder</h2>
+        </div>
+        <div class="lead-admin-form">
+          <label class="field">
+            <span class="field__label mono">Nombre completo</span>
+            <input type="text" id="lNombre" maxlength="120" required />
+          </label>
+          <label class="field">
+            <span class="field__label mono">Correo</span>
+            <input type="email" id="lEmail" maxlength="160" required />
+          </label>
+          <label class="field">
+            <span class="field__label mono">Teléfono / WhatsApp</span>
+            <input type="text" id="lTelefono" maxlength="40" />
+          </label>
+          <label class="field">
+            <span class="field__label mono">Usuario</span>
+            <input type="text" id="lUsuario" maxlength="80" autocomplete="off" required />
+          </label>
+          <label class="field">
+            <span class="field__label mono">Contraseña inicial</span>
+            <input type="password" id="lPassword" minlength="8" autocomplete="new-password" required />
+          </label>
+          <label class="field">
+            <span class="field__label mono">Grupo</span>
+            <select id="lGrupo" required>
+              <option value="">Selecciona…</option>
+              <option value="hombres">Hombres</option>
+              <option value="mujeres">Mujeres</option>
+              <option value="jovenes">Jóvenes</option>
+            </select>
+          </label>
+        </div>
+        <button class="btn btn--solid btn--lg" type="submit">Crear líder</button>
+        <p class="adm-error mono" id="leaderError" role="alert"></p>
+        <p class="lead-ok mono" id="leaderOk" role="status"></p>
+      </form>
+
+      <section class="lead-card">
+        <div class="lead-card__head lead-card__head--row">
+          <div>
+            <span class="mono">Equipo</span>
+            <h2>Líderes registrados</h2>
+          </div>
+          <span class="mono" id="leaderCount"></span>
+        </div>
+        <div class="lead-table-wrap">
+          <table class="lead-table">
+            <thead>
+              <tr><th>Líder</th><th>Grupo</th><th>Usuario</th><th>Reportes</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="leaderBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="lead-card">
+      <div class="lead-card__head lead-card__head--row">
+        <div>
+          <span class="mono">Reportes</span>
+          <h2>Células reportadas</h2>
+        </div>
+        <span class="mono" id="cellCount"></span>
+      </div>
+
+      <form class="lead-filters" id="filterForm">
+        <label class="field">
+          <span class="field__label mono">Grupo</span>
+          <select id="fGrupo">
+            <option value="">Todos</option>
+            <option value="hombres">Hombres</option>
+            <option value="mujeres">Mujeres</option>
+            <option value="jovenes">Jóvenes</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label mono">Desde</span>
+          <input type="date" id="fDesde" />
+        </label>
+        <label class="field">
+          <span class="field__label mono">Hasta</span>
+          <input type="date" id="fHasta" />
+        </label>
+        <label class="field">
+          <span class="field__label mono">Líder</span>
+          <select id="fLider"><option value="">Todos</option></select>
+        </label>
+        <div class="lead-filters__actions">
+          <button class="btn btn--solid" type="submit">Aplicar</button>
+          <button class="btn btn--ghost" type="button" id="clearFilters">Limpiar</button>
+        </div>
+      </form>
+
+      <div class="lead-admin-stats" id="cellSummary"></div>
+
+      <div class="lead-chart-card">
+        <div class="lead-card__head lead-card__head--row">
+          <div>
+            <span class="mono">Progreso</span>
+            <h2>Personas por grupo y por mes</h2>
+          </div>
+          <span class="mono" id="chartNote"></span>
+        </div>
+        <div class="lead-chart-legend">
+          <span><i class="lead-dot lead-dot--hombres"></i>Hombres</span>
+          <span><i class="lead-dot lead-dot--mujeres"></i>Mujeres</span>
+          <span><i class="lead-dot lead-dot--jovenes"></i>Jóvenes</span>
+        </div>
+        <div id="cellChart" class="lead-chart" role="img" aria-label="Gráfico de progreso de células por grupo"></div>
+      </div>
+
+      <div class="lead-table-wrap">
+        <table class="lead-table">
+          <thead>
+            <tr><th>Fecha</th><th>Líder</th><th>Grupo</th><th>Palabra</th><th>Personas</th><th>Notas</th></tr>
+          </thead>
+          <tbody id="cellBody"></tbody>
+        </table>
+      </div>
+      <p class="adm-status mono" id="cellStatus" role="status"></p>
+    </section>
+
+    <p class="adm-foot mono">DCN Internacional · Administración de líderes y células.</p>
+  </main>
+
+  <dialog id="resetDialog" class="adm-modal">
+    <div class="adm-modal__head">
+      <div>
+        <span class="mono">Recuperación</span>
+        <h2>Enlace de contraseña</h2>
+      </div>
+      <button class="adm-modal__close" type="button" id="resetClose" aria-label="Cerrar">×</button>
+    </div>
+    <p class="adm-modal__note" id="resetNote">Comparte este enlace con el líder. Vence en 1 hora.</p>
+    <input class="lead-reset-input" id="resetUrl" readonly />
+    <div class="adm-modal__actions">
+      <button class="btn btn--outline" type="button" id="copyReset">Copiar enlace</button>
+      <button class="btn btn--ghost" type="button" id="closeReset2">Cerrar</button>
+    </div>
+  </dialog>
+
+  <script src="/admin-lideres.js" defer></script>
+</body>
+</html>
