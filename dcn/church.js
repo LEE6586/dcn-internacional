@@ -178,6 +178,14 @@
       icon: "shield",
       desc: "Doce hombres que se fortalecen en la fe, se hacen responsables unos de otros y lideran con integridad.",
       meta: "12 integrantes · Reunión semanal"
+    },
+    {
+      id: "jovenes",
+      name: "Jóvenes",
+      label: "Equipo de 12",
+      icon: "flame",
+      desc: "Doce jóvenes que descubren su propósito, sirven con pasión y construyen amistades que los acercan a Cristo.",
+      meta: "12 integrantes · Reunión semanal"
     }
   ];
 
@@ -651,12 +659,13 @@
     wrap.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-team-join]");
       if (!btn) return;
-      const women = btn.dataset.teamJoin === "mujeres";
+      const teamId = btn.dataset.teamJoin;
+      const team = TEAMS.find((t) => t.id === teamId);
       const topic = $("#contactTopic");
       if (topic) topic.value = "equipos";
       const msg = $("#contactMessage");
       if (msg && !msg.value.trim()) {
-        msg.value = `Quiero unirme al Equipo de 12 de ${women ? "Mujeres" : "Hombres"}.`;
+        msg.value = `Quiero unirme al Equipo de 12 de ${team ? team.name : "Jóvenes"}.`;
       }
       $("#contacto")?.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
     });

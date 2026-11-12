@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    DCN INTERNACIONAL — sistema visual
    Sacro moderno · azul de marca · luz sobre noche
    ========================================================================== */
@@ -1111,7 +1111,7 @@ em { font-style: italic; }
 .leaders__note a { color: var(--sky); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── EQUIPOS DE 12 ──────────────────────────────────────────────────────── */
-.teams { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.teams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .team {
   position: relative;
   overflow: hidden;
